@@ -1,11 +1,17 @@
 package org.example.springbootdemo.controller;
 
+import com.github.pagehelper.PageInfo;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.example.springbootdemo.pojo.UserInfo;
 import org.example.springbootdemo.service.UserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 /**
  * @ClassName UserController
@@ -13,7 +19,7 @@ import java.util.List;
  * @Date 2025/6/17
  * @Description
  */
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class UserController {
 
@@ -21,8 +27,39 @@ public class UserController {
 
 
     @RequestMapping("/getAllUser")
-    public List<UserInfo> getAllUser() {
-        return userService.getAllUserInfo();
+    @ResponseBody
+    public PageInfo<UserInfo> getAllUser(int pageNum, int pageSize) {
+        return userService.getAllUserInfo(pageNum,pageSize);
+    }
+    @RequestMapping("/test01")
+    public String test01(HttpServletRequest request) {
+        request.setAttribute("msg1","msg1");
+        request.setAttribute("msg3",100);
+        request.setAttribute("msg4",new UserInfo("jack",18));
+        request.setAttribute("date",new Date());
+        List<UserInfo> userInfos = new ArrayList<>();
+        userInfos.add(new UserInfo("yyqx",24));
+        userInfos.add(new UserInfo("yyqx1",24));
+        userInfos.add(new UserInfo("yyqx2",24));
+        request.setAttribute("userInfos",userInfos);
+
+        request.getSession().setAttribute("session","session");
+        request.getSession().getServletContext().setAttribute("application","application");
+
+        return "test01";
+    }
+
+    // 接收前端传过来的id，thymeleaf
+    @RequestMapping("/test02")
+    public String test02(int id) {
+        System.out.println("id="+id);
+        return "xxxx";
+    }
+
+    @RequestMapping("/freemarkerTest")
+    public String freemarkerTest(HttpServletRequest request){
+        request.setAttribute("msg1","freemarkerTest");
+        return "freemarker";
     }
 
 }

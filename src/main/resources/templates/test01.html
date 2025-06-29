@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+hello test01!
+<span th:text="abc"></span><br>
+<span th:text="${msg1}"></span><br>
+<!--int 类型-->
+<span th:if="${msg3}>10">条件显示</span><br>
+<!--对象属性-->
+<input type="text" th:value="${msg4.name}">
+<input type="text" th:value="${msg4.age}">
+<!--遍历list集合-->
+<table border="1" width="500">
+    <tr>
+        <td>年龄</td>
+        <td>姓名</td>
+        <td>集合中元素大小</td>
+        <td>计数</td>
+        <td>索引</td>
+    </tr>
+    <tr th:each="u,i : ${userInfos}">
+        <td th:text="${u.age}"></td>
+        <td th:text="${u.name}"></td>
+        <td th:text="${i.size}"></td>
+        <td th:text="${i.count}"></td>
+        <td th:text="${i.index}"></td>
+    </tr>
+</table>
+
+<!--携带id 跳转到后端-->
+<a th:href="@{/test02(id=30)}">携带id 跳转到后端</a>
+<a th:href="@{/test02(id=${msg3})}">携带id 跳转到后端</a>
+<!--js跳转 -->
+<!-- href=”javascript:void(0);”的含义 即让超链接去执行一个js函数,而不是去跳转到一个地址-->
+<a href="javascript:void(0);" th:onclick="'del('+${msg3}+')'">js跳转</a><br>
+
+<span th:text="${#strings.length(msg1)}"></span>
+<span th:text="${date}"></span>
+<span th:text="${#dates.format(date)}"></span>
+<span th:text="${#dates.year(date)}"></span><br>
+
+<h5 th:text="${msg1}"></h5>
+<h5 th:text="${session.session}"></h5>
+<h5 th:text="${session}"></h5>
+<h5 th:text="${application.application}"></h5>
+<h5 th:text="${application}"></h5>
+
+<script type="text/javascript">
+    function del(id) {
+        alert(id)
+    }
+</script>
+</body>
+</html>

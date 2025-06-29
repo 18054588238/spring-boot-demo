@@ -13,8 +13,6 @@ class SpringBootDemoApplicationTests {
 
     @Test
     void contextLoads() {
-        userService.getAllUserInfo();
-        System.out.println(userService.getAllUserInfo());
     }
 
 }

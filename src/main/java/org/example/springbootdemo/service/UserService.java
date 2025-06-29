@@ -1,6 +1,7 @@
 package org.example.springbootdemo.service;
 
 
+import com.github.pagehelper.PageInfo;
 import org.example.springbootdemo.pojo.UserInfo;
 
 import java.util.List;
@@ -13,5 +14,5 @@ import java.util.List;
  */
 public interface UserService {
 
-    List<UserInfo> getAllUserInfo();
+    PageInfo<UserInfo> getAllUserInfo(int pageNum, int pageSize);
 }

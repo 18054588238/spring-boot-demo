@@ -1,5 +1,7 @@
 package org.example.springbootdemo.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.example.springbootdemo.mapper.UserMapper;
 import org.example.springbootdemo.pojo.UserInfo;
 import org.example.springbootdemo.service.UserService;
@@ -20,7 +22,11 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<UserInfo> getAllUserInfo() {
-        return userMapper.getAllUser();
+    public PageInfo<UserInfo> getAllUserInfo(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<UserInfo> allUser = userMapper.getAllUser();
+//        使用pageinfo包装查询后的结果，交给前端页面
+        PageInfo<UserInfo> pageInfo = new PageInfo<>(allUser);
+        return pageInfo;
     }
 }

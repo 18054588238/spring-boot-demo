@@ -22,4 +22,9 @@ public class UserInfo {
     private Date birthdate;
     private String filename;
     private String filetype;
+
+    public UserInfo(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
 }
