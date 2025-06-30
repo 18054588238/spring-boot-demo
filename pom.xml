@@ -85,6 +85,12 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.4.7</version>
         </dependency>
+<!--        api文档构建工具springdoc-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+            <version>2.5.0</version>
+        </dependency>
     </dependencies>
 
     <build>

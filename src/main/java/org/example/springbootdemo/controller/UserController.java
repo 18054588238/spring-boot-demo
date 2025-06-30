@@ -1,6 +1,10 @@
 package org.example.springbootdemo.controller;
 
 import com.github.pagehelper.PageInfo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.example.springbootdemo.pojo.UserInfo;
@@ -21,6 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequiredArgsConstructor
+@Tag(name = "用户管理模块",description = "提供对用户信息的一些操作接口")
 public class UserController {
 
     private final UserService userService;
@@ -28,6 +33,11 @@ public class UserController {
 
     @RequestMapping("/getAllUser")
     @ResponseBody
+    @Parameters({
+            @Parameter(name = "pageNum",description = "页数",required = true),
+            @Parameter(name = "pageSize",description = "页码",required = true)
+    })
+    @Operation(summary = "查询用户信息")
     public PageInfo<UserInfo> getAllUser(int pageNum, int pageSize) {
         return userService.getAllUserInfo(pageNum,pageSize);
     }

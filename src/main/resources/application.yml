@@ -44,3 +44,8 @@ mybatis:
 logging:
   level:
     org.example.springbootdemo.mapper: trace
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
