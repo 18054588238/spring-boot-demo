@@ -1,6 +1,7 @@
 package org.example.springbootdemo.mapper;
 
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.example.springbootdemo.pojo.UserInfo;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @Description
  */
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<UserInfo> {
 
     List<UserInfo> getAllUser();
 }

@@ -1,5 +1,6 @@
 package org.example.springbootdemo.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.example.springbootdemo.mapper.UserMapper;
@@ -17,7 +18,7 @@ import java.util.List;
  * @Description
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper,UserInfo> implements UserService {
     @Autowired
     private UserMapper userMapper;
 

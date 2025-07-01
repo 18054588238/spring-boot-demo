@@ -1,11 +1,15 @@
 package org.example.springbootdemo;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jakarta.annotation.Resource;
+import org.example.springbootdemo.pojo.UserInfo;
 import org.example.springbootdemo.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -20,6 +24,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
 /*测试controller层接口方法*/
 @SpringBootTest
 @AutoConfigureMockMvc//测试controller层需要mockmvc环境
@@ -31,6 +37,19 @@ class SpringBootDemoApplicationTests {
     private MockMvc mockMvc;
     @Autowired
     private MockMvcBuilderSupport mockMvcBuilderSupport;
+
+    @Test
+    void testPage() {
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.gt("age",18);
+        Page<UserInfo> page = userService.page(new Page<>(1, 3), queryWrapper);
+        List<UserInfo> userInfos = page.getRecords();
+        userInfos.forEach(System.out::println);
+        System.out.println("总页数:"+page.getPages());
+        System.out.println("总记录数:"+page.getTotal());
+        System.out.println("当前页:"+page.getCurrent());
+        System.out.println("页大小:"+page.getSize());
+    }
 
     @Test
     void contextLoads() throws Exception {
@@ -45,7 +64,7 @@ class SpringBootDemoApplicationTests {
         System.out.println(response.getStatus());
         System.out.println(response.getContentAsString());
     }
-    @BeforeEach
+//    @BeforeEach
     public void before(WebApplicationContext  context) {
         System.out.println("单元测试开始");
         // 全局拦截
@@ -58,9 +77,10 @@ class SpringBootDemoApplicationTests {
                 .build();
     }
 
-    @AfterEach
+//    @AfterEach
     public void after() {
         System.out.println("单元测试结束");
     }
+
 
 }

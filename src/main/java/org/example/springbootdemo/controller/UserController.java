@@ -43,6 +43,19 @@ public class UserController {
         System.out.println("热部署测试！");
         return userService.getAllUserInfo(pageNum,pageSize);
     }
+
+    @RequestMapping("/login")
+    public String login(String uname,String pwd,HttpServletRequest req){
+        System.out.println("---" + uname + "---" + pwd);
+        if ("lili".equals(uname) && "123123".equals(pwd)){
+            // 登录成功在session作用域中存入数据：
+            req.getSession().setAttribute("uname",uname);
+            // 登录成功跳转到主页面：
+            return "main";
+        }
+        return "redirect:/login.html";
+    }
+
     @RequestMapping("/test01")
     public String test01(HttpServletRequest request) {
         request.setAttribute("msg1","msg1");

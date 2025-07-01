@@ -100,6 +100,16 @@
             <!--设置为true热部署才生效-->
             <optional>true</optional>
         </dependency>
+<!--        数据校验-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.7</version>
+        </dependency>
     </dependencies>
 
     <build>
